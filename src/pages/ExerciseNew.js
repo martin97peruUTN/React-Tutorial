@@ -1,15 +1,16 @@
 import React from "react"
-
+import ExerciseForm from "../components/ExerciseForm"
+import Card from "../components/Card"
 class ExerciseNew extends React.Component{
-
+/*
     //lo inicializo vacio porque sino tira null los value={this.state.xxx} y no anda
     state={}
 
     handleChange = e =>{
         //console.log(`${e.target.name}: ${e.target.value}`)
-        /*let partialState={}
+        let partialState={}
         partialState[e.target.name]=e.target.value
-        this.setState(partialState)*/
+        this.setState(partialState)
         //Sustituyo esto usando babel
         this.setState({
             [e.target.name]:e.target.value
@@ -20,76 +21,47 @@ class ExerciseNew extends React.Component{
         e.preventDefault()
         console.log(this.state)
     }
+*/
+
+    state={
+        form:{
+            //lo defino para hacer destructuring en la card y no tener que pasar propiedad por propiedad
+            title:"",
+            description:"",
+            img:"",
+            rightColor:"",
+            leftColor:""
+        }
+    }
+    handleChange = e =>{
+        //console.log(`${e.target.name}: ${e.target.value}`)
+        /*let partialState={}
+        partialState[e.target.name]=e.target.value
+        this.setState(partialState)*/
+        //Sustituyo esto usando babel
+        this.setState({
+             //con esto mantiene todo lo que tenia antes y si es una key nueva que sustituya
+            //sino iba pisando todo en un solo valor
+            form:{
+                ...this.state.form,
+                [e.target.name]:e.target.value
+            }
+        })
+    }
 
     render(){
         return (
-            <div className="container">
-            <form 
-                //porque el boton es de ese tipo
-                onSubmit={this.handleSubmit}
-            >
-                <div className="form-group">
-                    <input 
-                        type="text" 
-                        className="form-control" 
-                        placeholder="title" 
-                        //tenemos que tener el name para identificarlo en el DOM
-                        name="title"
+            <div className="row">
+                <div className="col-sm">
+                    <Card {...this.state.form}/>
+                </div>
+                <div className="col-sm">
+                    <ExerciseForm
                         onChange={this.handleChange}
-                        value={this.state.title}
+                        form={this.state.form}
                     />
                 </div>
-                <div className="form-group">
-                    <input 
-                        type="text" 
-                        className="form-control" 
-                        placeholder="description" 
-                        name="description"
-                        onChange={this.handleChange}
-                        value={this.state.description}
-                    />
-                </div>
-                <div className="form-group">
-                    <input 
-                        type="text" 
-                        className="form-control" 
-                        placeholder="img" 
-                        name="img"
-                        onChange={this.handleChange}
-                        value={this.state.img}
-                    />
-                </div>
-                <div className="form-row">
-                    <div className="col">
-                        <input 
-                            type="text" 
-                            className="form-control" 
-                            placeholder="leftColor" 
-                            name="leftColor"
-                            onChange={this.handleChange}
-                            value={this.state.leftColor}
-                        />
-                    </div>
-                    <div className="col">
-                        <input 
-                            type="text" 
-                            className="form-control"
-                            placeholder="rightColor" 
-                            name="rightColor"
-                            onChange={this.handleChange}
-                            value={this.state.rightColor}
-                        />    
-                    </div>
-                </div>
-                
-                <button 
-                    type="submit" 
-                    className="btn btn-primary"
-                >
-                    Submit
-                </button>
-            </form>
-        </div>
+            </div>
         )
     }
 
