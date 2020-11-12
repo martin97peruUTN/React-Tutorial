@@ -49,6 +49,27 @@ class ExerciseNew extends React.Component{
         })
     }
 
+    handleSubmit = async e =>{
+        //para no ver el reload
+        e.preventDefault()
+        //console.log(form)
+        try {
+            let config = {
+                method:"POST",
+                headers:{
+                    "Accept":"application/json",
+                    "Content-type":"application/json",
+                },
+                body: JSON.stringify(this.state.form)
+            }
+            let res = await fetch("http://localhost:8000/api/exercises", config) //Si no mando config por defecto hace un GET
+            let json = await res.json()
+
+            console.log(json)
+        } catch (error) {
+        }
+    }
+
     render(){
         return (
             <div className="row">
@@ -58,6 +79,7 @@ class ExerciseNew extends React.Component{
                 <div className="col-sm">
                     <ExerciseForm
                         onChange={this.handleChange}
+                        onSubmit={this.handleSubmit}
                         form={this.state.form}
                     />
                 </div>

@@ -5,20 +5,13 @@ class ExerciseForm extends React.Component{
     //lo inicializo vacio porque sino tira null los value={form.xxx} y no anda
     //state={}
 
-
-    handleSubmit = e =>{
-        //para no ver el reload
-        e.preventDefault()
-        //console.log(form)
-    }
-
     render(){
-        const {onChange,form}=this.props
+        const {onChange,onSubmit,form}=this.props
         return (
             <div className="container">
             <form 
                 //porque el boton es de ese tipo
-                onSubmit={this.handleSubmit}
+                onSubmit={onSubmit}
             >
                 <div className="form-group">
                     <input 
