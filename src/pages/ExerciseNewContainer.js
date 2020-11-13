@@ -2,6 +2,7 @@ import React from "react"
 import FatalError from "./500"
 import { withRouter } from 'react-router-dom'
 import ExerciseNew from "./ExerciseNew"
+import url from "../config"
 
 class ExerciseNewContainer extends React.Component{
 /*
@@ -70,7 +71,7 @@ class ExerciseNewContainer extends React.Component{
                 },
                 body: JSON.stringify(this.state.form)
             }
-            let res = await fetch("http://localhost:8000/api/exercises", config) //Si no mando config por defecto hace un GET
+            let res = await fetch(`${url}/exercises`, config) //Si no mando config por defecto hace un GET
             let json = await res.json()
 
             this.state({

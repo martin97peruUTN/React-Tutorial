@@ -6,13 +6,14 @@ import Loading from "../components/Loading"
 import FatalError from "./500"
 import Exercises from "./Exercises"
 import useFetch from "../hooks/useFetch"
+import url from "../config"
 
 const ExercisesContainer = ()=>{
 
     //Effect es para decirle al componente que tiene que hacer algo despues de renderizarse.
     //Se ejecute despues del primer renderizado y de cada update
 
-    const {data,loading,error}=useFetch("http://localhost:8000/api/exercises")
+    const {data,loading,error}=useFetch(`${url}/exercises`)
 
     if(loading){
         return <Loading/>
