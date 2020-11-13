@@ -1,15 +1,18 @@
-import React,{useState} from "react"
+import React from "react"
 //import Welcome from "../components/Welcome"
 //import ExerciseList from "../components/ExerciseList"
 //import AddButton from "../components/AddButton"
 import Loading from "../components/Loading"
 import FatalError from "./500"
 import Exercises from "./Exercises"
+import useFetch from "../hooks/useFetch"
 
 const ExercisesContainer = ()=>{
-    const [data,setData]=useState([])
-    const [loading,setLoading]=useState(true)
-    const [error,setError]=useState(null)
+
+    //Effect es para decirle al componente que tiene que hacer algo despues de renderizarse.
+    //Se ejecute despues del primer renderizado y de cada update
+
+    const {data,loading,error}=useFetch("http://localhost:8000/api/exercises")
 
     if(loading){
         return <Loading/>
