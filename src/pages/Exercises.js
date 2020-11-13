@@ -45,11 +45,12 @@ class Exercises extends React.Component{
             return <FatalError/>
         }
         return(
-            <div>
+            //React.Fragment permite retornar varios elementos sin necesidad de  crear uno nuevo en el DOM
+            <React.Fragment>
                 <Welcome username="Peru"/>
                 <ExerciseList exercises={this.state.data}/>
                 <AddButton />
-            </div>
+            </React.Fragment>
         )
     }
 }

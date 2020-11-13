@@ -1,6 +1,9 @@
 import React from "react"
 import ExerciseForm from "../components/ExerciseForm"
 import Card from "../components/Card"
+import FatalError from "./500"
+import { withRouter } from 'react-router-dom'
+
 class ExerciseNew extends React.Component{
 /*
     //lo inicializo vacio porque sino tira null los value={this.state.xxx} y no anda
@@ -31,7 +34,10 @@ class ExerciseNew extends React.Component{
             img:"",
             rightColor:"",
             leftColor:""
-        }
+        },
+        loading:false,
+        error:null
+
     }
     handleChange = e =>{
         //console.log(`${e.target.name}: ${e.target.value}`)
@@ -50,6 +56,9 @@ class ExerciseNew extends React.Component{
     }
 
     handleSubmit = async e =>{
+        this.setState({
+            loading:true
+        })
         //para no ver el reload
         e.preventDefault()
         //console.log(form)
@@ -65,12 +74,26 @@ class ExerciseNew extends React.Component{
             let res = await fetch("http://localhost:8000/api/exercises", config) //Si no mando config por defecto hace un GET
             let json = await res.json()
 
-            console.log(json)
+            this.state({
+                loading:false
+            })
+
+            //TODO Revisar esto del video 28 que no anda
+            this.props.history.push('/exercise')
+
+            //console.log(json)
         } catch (error) {
+            this.setState({
+                loading:false,
+                error
+            })
         }
     }
 
     render(){
+        if(this.state.error){
+            return <FatalError/>
+        }
         return (
             <div className="row">
                 <div className="col-sm">
@@ -88,4 +111,4 @@ class ExerciseNew extends React.Component{
     }
 
 }
-export default ExerciseNew
+export default withRouter(ExerciseNew)
