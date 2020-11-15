@@ -14,5 +14,6 @@ const Exercises = ({data}) => (
         <AddButtom />
     </Fragment>
 )
+//Meto un comentario aca
 
 export default Exercises
